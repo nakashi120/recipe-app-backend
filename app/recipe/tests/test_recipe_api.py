@@ -15,6 +15,9 @@ from core.models import Recipe
 from recipe.serializers import RecipeSerializer
 
 
+RECIPES_URL = reverse('recipe: recipe-list')
+
+
 def create_recipe(user, **params):
     """Create and return a sample recipe."""
     defaults = {
@@ -22,7 +25,7 @@ def create_recipe(user, **params):
         'time_minutes': 22,
         'price': Decimal('5.25'),
         'description': 'Sample description',
-        'link': 'https://example.com/recipe.pdf',
+        'link': 'http://example.com/recipe.pdf',
     }
     defaults.update(params)
 
@@ -43,7 +46,7 @@ class PublicRecipeAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-class PrivateRecipeAPITests(TestCase):
+class PrivateRecipeApiTests(TestCase):
     """Test authenticated API requests."""
 
     def setUp(self):
